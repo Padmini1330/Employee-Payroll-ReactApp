@@ -121,14 +121,14 @@ const save = async(event)=>{
       salary:formValue.salary,
       startDate:`${formValue.day} ${formValue.month} ${formValue.year}`,
       notes:formValue.notes,
-      id:2,
+      id:3,
       profileUrl:formValue.profileUrl,
   }
 
   employee.addEmployee(object).then(data=>{
-      console.log("data added");
+      console.log("Data added successfully!");
   }).catch(err =>{
-      console.log("err while Add");
+      console.log("Error while adding data");
   })
 
 }
