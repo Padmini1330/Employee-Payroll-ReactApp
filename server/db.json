@@ -1,0 +1,16 @@
+{
+    "employee-payroll": [
+      {
+        "name": "Padmini",
+        "departments": [
+            "HR",
+            "Engineer"
+          ],
+        "gender": "female",
+        "salary": "500000",
+        "startDate": "1 Jan 2020",
+        "note": "Heyy",
+        "profilePicture": "../assets/profile-images/Ellipse -7.png"      
+      }
+    ]
+  }
