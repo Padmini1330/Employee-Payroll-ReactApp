@@ -1,16 +1,28 @@
 {
-    "employee": [
-      {
-        "name": "Padmini",
-        "departments": [
-            "HR",
-            "Engineer"
-          ],
-        "gender": "female",
-        "salary": "500000",
-        "startDate": "1 Jan 2020",
-        "note": "Heyy",
-        "profilePicture": "../assets/profile-images/Ellipse -7.png"      
-      }
-    ]
-  }
+  "employee": [
+    {
+      "name": "Sheldon",
+      "departmentValue": [
+        "Sales"
+      ],
+      "gender": "male",
+      "salary": "40000",
+      "startDate": "1 Nov 2021",
+      "notes": "aaa",
+      "id": 1,
+      "profileUrl": "../../assets/profile-images/Ellipse -3.png"
+    },
+    {
+      "name": "Amy",
+      "departmentValue": [
+        "Engineer"
+      ],
+      "gender": "female",
+      "salary": "42000",
+      "startDate": "06 Nov 2021",
+      "notes": "test2",
+      "id": 2,
+      "profileUrl": "../../assets/profile-images/Ellipse -4.png"
+    }
+  ]
+}
