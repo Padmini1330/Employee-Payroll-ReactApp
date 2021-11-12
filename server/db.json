@@ -23,6 +23,18 @@
       "notes": "test2",
       "id": 2,
       "profileUrl": "../../assets/profile-images/Ellipse -4.png"
+    },
+    {
+      "name": "Padmini",
+      "departmentValue": [
+        "Engineer"
+      ],
+      "gender": "female",
+      "salary": "48000",
+      "startDate": "10 Nov 2021",
+      "notes": "test3",
+      "id": 3,
+      "profileUrl": "../../assets/profile-images/Ellipse -4.png"
     }
   ]
 }
