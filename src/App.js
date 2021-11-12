@@ -7,9 +7,9 @@ function App() {
   return (
     <BrowserRouter>  
     <Routes>
-    <Route path="/" element={<PayrollForm />} ></Route> 
+      <Route path="/" element={<PayrollForm />} ></Route> 
     </Routes>
-</BrowserRouter>
+    </BrowserRouter>
   );
 }
 
