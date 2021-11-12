@@ -8,7 +8,9 @@ import profile6 from '../../assets/profile-images/Ellipse -1.png';
 import './payroll-form.scss';
 import logo from '../../assets/images/logo.png';
 import { userParams, Link, withRouter } from 'react-router-dom';
+import EmployeeService from '../../services/employee-service.js';
 
+var employee=new EmployeeService();
 const PayrollForm = (props) => {
     let initialValue = {
   name: '',
@@ -23,25 +25,25 @@ const PayrollForm = (props) => {
   allDepartment:['HR','Sales','Finance','Engineer','Others'],
   departmentValue: [], 
   gender: '',   
-  salary: 40000,
+  salary: '40000',
   day: '1',
   month: 'Jan',
   year: '2021',
   startDate: '',
   notes: '',
   id: '',      
+  profileUrl:'',
   isUpdate: false,
   isError: false,
   error: {
     department: '',
     name: '',
     gender: '',
-    profilePicture: '',
+    salary:'',
+    profileUrl: '',
     startDate: ''    
   }
 }
-
-
     
 const [formValue,setForm] = useState(initialValue);
 
@@ -92,7 +94,7 @@ const validData=async()=>{
         error.name='profile is required field'
         isError=true;
     }
-    if(formValue.department.length <1)
+    if(formValue.departmentValue.length <1)
     {
         error.name='department is required field'
         isError=true;
@@ -101,8 +103,34 @@ const validData=async()=>{
     return isError;
 }
 
-const save=async(event)=>{
-    event.preventDefault();
+const save = async(event)=>{
+  event.preventDefault();
+  console.log("save");
+
+  if(await validData())
+  {
+      console.log('error',formValue);
+      return;
+  }
+
+  let object ={
+
+      name:formValue.name,
+      departmentValue:formValue.departmentValue,
+      gender:formValue.gender,
+      salary:formValue.salary,
+      startDate:`${formValue.day} ${formValue.month} ${formValue.year}`,
+      notes:formValue.notes,
+      id:formValue.id,
+      profileUrl:formValue.profileUrl,
+  }
+
+  employee.addEmployee(object).then(data=>{
+      console.log("data added");
+  }).catch(err =>{
+      console.log("err while Add");
+  })
+
 }
 const reset=()=>{
     setForm({
@@ -128,45 +156,45 @@ const reset=()=>{
             <div className="row-content">
               <label className="label text" htmlFor="name">Name</label>
               <input className="input" type="text" id="name" name="name" value={formValue.name} onChange={changeValue} placeholder="Your name.." required />
-              <valid-message className="valid-name" htmlFor="name">{formValue.name}</valid-message>
-              <error-output className="name-error" htmlFor="name">{formValue.error.name}</error-output>
             </div>
+            <div className="error-output">{formValue.error.name}</div>
             <div className="row-content">
-              <label className="label text" htmlFor="profilePicture">Profile Image</label>
+              <label className="label text" htmlFor="profileUrl">Profile Image</label>
               <div className="profile-radio-content">
                 <label>
-                  <input type="radio" id="profile1" name="profilePicture" value="../../assets/profile-images/Ellipse -3.png" 
-                    checked={formValue.profileArray === '../../assets/profile-images/Ellipse -3.png'} onChange={changeValue} />
+                  <input type="radio" id="profile1" name="profileUrl" value="../../assets/profile-images/Ellipse -3.png" 
+                    checked={formValue.profileUrl === '../../assets/profile-images/Ellipse -3.png'} onChange={changeValue} />
                   <img className="profile" id="image1" src={profile1} alt="" />
                 </label>
                 <label>
-                  <input type="radio" id="profile2" name="profilePicture" value="../../assets/profile-images/Ellipse -4.png" 
-                    checked={formValue.profileArray === '../../assets/profile-images/Ellipse -4.png'} onChange={changeValue} />
+                  <input type="radio" id="profile2" name="profileUrl" value="../../assets/profile-images/Ellipse -4.png" 
+                    checked={formValue.profileUrl === '../../assets/profile-images/Ellipse -4.png'} onChange={changeValue} />
                   <img className="profile" id="image2" src={profile2} alt="" />
                 </label>
                 <label>
-                  <input type="radio" id="profile3" name="profilePicture" value="../../assets/profile-images/Ellipse -5.png" 
-                    checked={formValue.profileArray === '../../assets/profile-images/Ellipse -5.png'} onChange={changeValue} />
+                  <input type="radio" id="profile3" name="profileUrl" value="../../assets/profile-images/Ellipse -5.png" 
+                    checked={formValue.profileUrl === '../../assets/profile-images/Ellipse -5.png'} onChange={changeValue} />
                   <img className="profile" id="image3" src={profile3} alt="" />
                 </label>
                 <label>
-                  <input type="radio" id="profile4" name="profilePicture" value="../../assets/profile-images/Ellipse -7.png" 
-                    checked={formValue.profileArray === '../../assets/profile-images/Ellipse -7.png'} onChange={changeValue} />
+                  <input type="radio" id="profile4" name="profileUrl" value="../../assets/profile-images/Ellipse -7.png" 
+                    checked={formValue.profileUrl === '../../assets/profile-images/Ellipse -7.png'} onChange={changeValue} />
                   <img className="profile" id="image4" src={profile4} alt="" />
                 </label>
                 <label>
-                  <input type="radio" id="profile5" name="profilePicture" value="../../assets/profile-images/Ellipse -2.png" 
-                    checked={formValue.profileArray === '../../assets/profile-images/Ellipse -2.png'} onChange={changeValue} />
+                  <input type="radio" id="profile5" name="profileUrl" value="../../assets/profile-images/Ellipse -2.png" 
+                    checked={formValue.profileUrl === '../../assets/profile-images/Ellipse -2.png'} onChange={changeValue} />
                   <img className="profile" id="image5" src={profile5} alt="" />
                 </label>
                 <label>
-                  <input type="radio" id="profile6" name="profile" value="../../assets/profile-images/Ellipse -1.png" 
-                    checked={formValue.profileArray === '../../assets/profile-images/Ellipse -1.png'} onChange={changeValue} />
+                  <input type="radio" id="profile6" name="profileUrl" value="../../assets/profile-images/Ellipse -1.png" 
+                    checked={formValue.profileUrl === '../../assets/profile-images/Ellipse -1.png'} onChange={changeValue} />
                   <img className="profile" id="image6" src={profile6} alt="" />
                 </label>
               </div>
                
             </div>
+            <div className="error-output">{formValue.error.profileUrl}</div>
             <div className="row-content">
               <label className="label text" htmlFor="gender">Gender</label>
               <div>
@@ -179,41 +207,32 @@ const reset=()=>{
                   <label className="text" htmlFor="female">Female</label>
                 </label>
               </div>
-              <valid-message className="valid-gender" htmlFor="gender">{formValue.gender}</valid-message>
-              <error-output className="gender-error" htmlFor="gender">{formValue.error.gender}</error-output>
-            </div>
-            <div className="row-content">
-              <label className="label text" htmlFor="department">Department</label>
-              <div>            
-                <label>
-                    <input class="checkbox" type="checkbox" id="hr" name="department" value="HR" onChange={changeValue} />
-                    <label class="text" for="hr">HR</label>
-                </label>
-                <label>
-                    <input class="checkbox" type="checkbox" id="sales" name="department" value="Sales" onChange={changeValue} />
-                    <label class="text" for="sales">Sales</label>
-                </label>
-                <label>
-                    <input class="checkbox" type="checkbox" id="finance" name="department" value="Finance" onChange={changeValue} />
-                    <label class="text" for="finance">Finance</label>
-                </label>
-                <label>
-                    <input class="checkbox" type="checkbox" id="engineer" name="department" value="Engineer" onChange={changeValue} />
-                    <label class="text" for="engineer">Engineer</label>
-                </label>
-                <label>
-                    <input class="checkbox" type="checkbox" id="others" name="department" value="Others" onChange={changeValue} />
-                    <label class="text" for="others">Others</label>
-                </label>
               </div>
-              
-            </div>
+              <div className="error-output">{formValue.error.gender}</div>
+            
+              <div className="row-content">
+                        <label className="label text" htmlFor="department">Department</label>
+                        <div>
+                            {formValue.allDepartment.map(item=>(
+                                <span key={item}>
+
+                                    <input className= "checkbox " type="checkbox" onChange={()=> onCheckChange(item)} name={item}
+                                    defaultChecked={()=>getChecked(item)} value={item}/>
+
+                                    <label className="text" htmlFor={item}>{item}</label>
+                                </span>
+                            ))}
+                        </div>
+                            
+                    </div>
+            <div className="error-output">{formValue.error.department}</div>
             <div className="row-content">
               <label className="label text" htmlFor="salary">Salary</label>
-              <input className="input" type="range" name="salary" id="salary" onChange={changeValue}
+              <input className="input" type="number" name="salary" id="salary" onChange={changeValue}
                 min="30000" max="50000" step="100" value={formValue.salary} />
               <output className="salary-output text" htmlFor="salary">{changeValue}</output>
             </div>
+            <div className="error-output">{formValue.error.salary}</div>
             <div className="row-content">
               <label className="label text" htmlFor="startDate">Start Date</label>
               <div name="startdate" id="startDate">
@@ -273,15 +292,14 @@ const reset=()=>{
                   <option value="2016">2016</option>
                 </select>
               </div>
-              <valid-message className="valid-startDate" htmlFor="startDate">{formValue.startDate}</valid-message>
-              <error-output className="startDate-error" htmlFor="startDate">{formValue.error.startDate}</error-output>
-            </div>
+             </div>
+             <div className="error-output">{formValue.error.startDate}</div>
             <div className="row-content">
               <label className="label text" htmlFor="notes">Notes</label>
               <textarea className="input" onChange={changeValue} value={formValue.notes} id="notes" name="notes" placeholder="Write a note..." style={{height:'100px'}}></textarea>
             </div>
             <div className="buttonParent">
-              <Link to='' className="resetButton button cancelButton">Cancel</Link>
+              <a routerlink="" className="resetButton button cancelButton">Cancel</a>
               <div className="submit-reset">
                 <button className="button submitButton" type="submit" id="submitButton">{formValue.isUpdate? 'Update' : 'Submit'}</button>
                 <button className="resetButton button" type="reset">Reset</button>
@@ -294,4 +312,4 @@ const reset=()=>{
   }
 
 
-export default PayrollForm;
+export default PayrollForm
