@@ -35,6 +35,24 @@
       "notes": "test3",
       "id": 3,
       "profileUrl": "../../assets/profile-images/Ellipse -4.png"
+    },
+    {
+      "name": "Shizuka",
+      "departmentValue": [
+        "Others",
+        "Sales",
+        "Finance",
+        "HR"
+      ],
+      "gender": "female",
+      "salary": "42300",
+      "startDate": "11 Nov 2021",
+      "notes": "test4",
+      "id": 4,
+      "profileUrl": "../../assets/profile-images/Ellipse -7.png"
     }
   ]
 }
+
+
+
