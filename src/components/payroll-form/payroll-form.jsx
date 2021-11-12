@@ -7,6 +7,7 @@ import profile5 from '../../assets/profile-images/Ellipse -2.png';
 import profile6 from '../../assets/profile-images/Ellipse -1.png';
 import './payroll-form.scss';
 import logo from '../../assets/images/logo.png';
+import { v1 as uuidv1 } from 'uuid';
 import { userParams, Link, withRouter } from 'react-router-dom';
 import EmployeeService from '../../services/employee-service';
 
@@ -121,15 +122,19 @@ const save = async(event)=>{
       salary:formValue.salary,
       startDate:`${formValue.day} ${formValue.month} ${formValue.year}`,
       notes:formValue.notes,
-      id:3,
+      id:uuidv1(),
       profileUrl:formValue.profileUrl,
   }
 
   employee.addEmployee(object).then(data=>{
+      alert("Employee added successfully!\n"+ JSON.stringify(data.data));
+      this.reset();
+      this.props.history.push("/home");
       console.log("Data added successfully!");
   }).catch(err =>{
       console.log("Error while adding data");
   })
+  //this.reset();
 
 }
 const reset=()=>{
