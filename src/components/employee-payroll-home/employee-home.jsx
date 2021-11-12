@@ -25,8 +25,8 @@ const Display = (props) => {
             <th>Actions</th>
         </tr>
         {
-            props.employeeArray && props.employeeArray.map((employee) => (
-              <tr key={employee.id}>
+            props.employeeArray && props.employeeArray.map((employee,ind) => (
+              <tr key={ind}>
                   <td><img className="profile" src={profile1} alt="" /></td>
                   <td>{employee.name}</td>
                   <td>{employee.gender}</td>
@@ -34,14 +34,19 @@ const Display = (props) => {
                     (<div className="dept-label">{dept}</div>))}</td>
                   <td> ₹ {employee.salary}</td>
                   <td>{employee.startDate}</td>
-                  <td><img src={deleteIcon} alt="delete" />
-                      <img src={editIcon} alt="edit" /></td>
+                  <td><img src={deleteIcon} onClick={() => remove(employee.id)} alt="delete" />
+                      <img src={editIcon} onClick={() => edit(employee.id)} alt="edit" /></td>
               </tr>
             ))
           }
         </tbody>
     </table>
   )
+}
+const remove = (id) => {
+}
+
+const edit = (id) => {
 }
 
 export default Display;
