@@ -8,9 +8,9 @@ import profile6 from '../../assets/profile-images/Ellipse -1.png';
 import './payroll-form.scss';
 import logo from '../../assets/images/logo.png';
 import { userParams, Link, withRouter } from 'react-router-dom';
-import EmployeeService from '../../services/employee-service.js';
+import EmployeeService from '../../services/employee-service';
 
-var employee=new EmployeeService();
+
 const PayrollForm = (props) => {
     let initialValue = {
   name: '',
@@ -22,7 +22,7 @@ const PayrollForm = (props) => {
       { url: '../../assets/profile-images/Ellipse -2.png'},
       { url: '../../assets/profile-images/Ellipse -1.png'},
   ],
-  allDepartment:['HR','Sales','Finance','Engineer','Others'],
+  allDepartments:['HR','Sales','Finance','Engineer','Others'],
   departmentValue: [], 
   gender: '',   
   salary: '40000',
@@ -45,8 +45,8 @@ const PayrollForm = (props) => {
   }
 }
     
+const employee=new EmployeeService();
 const [formValue,setForm] = useState(initialValue);
-
 const changeValue=(event)=>{
     setForm({...formValue,[event.target.name]: event.target.value})
 }
@@ -121,7 +121,7 @@ const save = async(event)=>{
       salary:formValue.salary,
       startDate:`${formValue.day} ${formValue.month} ${formValue.year}`,
       notes:formValue.notes,
-      id:formValue.id,
+      id:2,
       profileUrl:formValue.profileUrl,
   }
 
@@ -156,8 +156,9 @@ const reset=()=>{
             <div className="row-content">
               <label className="label text" htmlFor="name">Name</label>
               <input className="input" type="text" id="name" name="name" value={formValue.name} onChange={changeValue} placeholder="Your name.." required />
-            </div>
-            <div className="error-output">{formValue.error.name}</div>
+              <div className="error-output">{formValue.error.name}</div>
+              </div>
+
             <div className="row-content">
               <label className="label text" htmlFor="profileUrl">Profile Image</label>
               <div className="profile-radio-content">
@@ -192,9 +193,9 @@ const reset=()=>{
                   <img className="profile" id="image6" src={profile6} alt="" />
                 </label>
               </div>
-               
+              <div className="error-output">{formValue.error.profileUrl}</div> 
             </div>
-            <div className="error-output">{formValue.error.profileUrl}</div>
+            
             <div className="row-content">
               <label className="label text" htmlFor="gender">Gender</label>
               <div>
@@ -207,32 +208,31 @@ const reset=()=>{
                   <label className="text" htmlFor="female">Female</label>
                 </label>
               </div>
-              </div>
               <div className="error-output">{formValue.error.gender}</div>
+              </div>
+              
             
               <div className="row-content">
                         <label className="label text" htmlFor="department">Department</label>
                         <div>
-                            {formValue.allDepartment.map(item=>(
+                            {formValue.allDepartments.map(item => (
                                 <span key={item}>
-
-                                    <input className= "checkbox " type="checkbox" onChange={()=> onCheckChange(item)} name={item}
-                                    defaultChecked={()=>getChecked(item)} value={item}/>
-
+                                    <input className="checkbox" type="checkbox" onChange={() => onCheckChange(item)} name={item} defaultChecked={() => getChecked(item)} value={item} />
                                     <label className="text" htmlFor={item}>{item}</label>
                                 </span>
                             ))}
                         </div>
-                            
-                    </div>
-            <div className="error-output">{formValue.error.department}</div>
-            <div className="row-content">
-              <label className="label text" htmlFor="salary">Salary</label>
-              <input className="input" type="number" name="salary" id="salary" onChange={changeValue}
-                min="30000" max="50000" step="100" value={formValue.salary} />
-              <output className="salary-output text" htmlFor="salary">{changeValue}</output>
-            </div>
-            <div className="error-output">{formValue.error.salary}</div>
+                  <div className="error-output">{formValue.error.department}</div>
+              </div>
+
+              <div className="row-content">
+                        <label className="label text" htmlFor="salary">Salary:</label>
+                        <input className="input" type="text" id="salary" name="salary" value={formValue.salary} onChange={changeValue} />
+                        <div className="error-output">{formValue.error.salary}</div>
+              </div>
+              <br />
+
+            
             <div className="row-content">
               <label className="label text" htmlFor="startDate">Start Date</label>
               <div name="startdate" id="startDate">
@@ -292,24 +292,26 @@ const reset=()=>{
                   <option value="2016">2016</option>
                 </select>
               </div>
+              <div className="error-output">{formValue.error.startDate}</div>
              </div>
-             <div className="error-output">{formValue.error.startDate}</div>
+             
             <div className="row-content">
               <label className="label text" htmlFor="notes">Notes</label>
               <textarea className="input" onChange={changeValue} value={formValue.notes} id="notes" name="notes" placeholder="Write a note..." style={{height:'100px'}}></textarea>
+              <div className="error-output">{formValue.error.notes}</div>
             </div>
             <div className="buttonParent">
-              <a routerlink="" className="resetButton button cancelButton">Cancel</a>
+              <Link to="" className="resetButton button cancelButton">Cancel</Link>
               <div className="submit-reset">
                 <button className="button submitButton" type="submit" id="submitButton">{formValue.isUpdate? 'Update' : 'Submit'}</button>
-                <button className="resetButton button" type="reset">Reset</button>
+                <button className="resetButton button" onClick={reset} type="reset">Reset</button>
               </div>
             </div>
           </form>
         </div>
       </div>
-    );
+    )
   }
 
 
-export default PayrollForm
+export default PayrollForm;
