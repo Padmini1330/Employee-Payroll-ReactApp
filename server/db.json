@@ -115,18 +115,6 @@
       "profileUrl": "../../assets/profile-images/Ellipse -5.png"
     },
     {
-      "name": "amyy",
-      "departmentValue": [
-        "Finance"
-      ],
-      "gender": "female",
-      "salary": "40000",
-      "startDate": "1 Jan 2021",
-      "notes": "",
-      "id": 13,
-      "profileUrl": "../../assets/profile-images/Ellipse -7.png"
-    },
-    {
       "name": "Hardman",
       "departmentValue": [
         "Sales",
@@ -140,30 +128,6 @@
       "profileUrl": "../../assets/profile-images/Ellipse -2.png"
     },
     {
-      "name": "Person1",
-      "departmentValue": [
-        "Sales"
-      ],
-      "gender": "female",
-      "salary": "40000",
-      "startDate": "1 Nov 2021",
-      "notes": "aaa",
-      "id": 16,
-      "profileUrl": "../../assets/profile-images/Ellipse -4.png"
-    },
-    {
-      "name": "Alia",
-      "departmentValue": [
-        "Others"
-      ],
-      "gender": "female",
-      "salary": "40000",
-      "startDate": "1 Nov 2021",
-      "notes": "heyy",
-      "id": "850a9bc0-43fb-11ec-8d40-3796d39a050c",
-      "profileUrl": "../../assets/profile-images/Ellipse -7.png"
-    },
-    {
       "name": "PadminiV",
       "departmentValue": [
         "Finance"
@@ -174,18 +138,6 @@
       "notes": "aaa",
       "id": "130721c0-4436-11ec-a6ff-5dede3901293",
       "profileUrl": "../../assets/profile-images/Ellipse -4.png"
-    },
-    {
-      "name": "Person5",
-      "departmentValue": [
-        "Others"
-      ],
-      "gender": "female",
-      "salary": "40000",
-      "startDate": "1 Nov 2021",
-      "notes": "abc",
-      "id": "02e1bb70-443b-11ec-b70a-45fd00b9e8af",
-      "profileUrl": "../../assets/profile-images/Ellipse -5.png"
     },
     {
       "name": "Mike",
