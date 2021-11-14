@@ -8,10 +8,14 @@ import profile3 from '../../assets/profile-images/Ellipse -5.png';
 import profile4 from '../../assets/profile-images/Ellipse -7.png';
 import profile5 from '../../assets/profile-images/Ellipse -2.png';
 import profile6 from '../../assets/profile-images/Ellipse -1.png';
+import EmployeeService from '../../services/employee-service';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
+var employee=new EmployeeService();
 const Display = (props) => {
   //alert(typeof(props.employeeArray));
+
+ 
   return (
     <table id="display" className="table">
       <tbody>
@@ -44,8 +48,11 @@ const Display = (props) => {
     </table>
   )
 }
-const remove = (id) => {
-}
+
+const remove= (id) =>{
+  employee.deleteEmployee(id);
+} 
+
 
 const edit = (id) => {
 }
