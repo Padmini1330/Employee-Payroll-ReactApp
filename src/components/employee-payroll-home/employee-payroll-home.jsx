@@ -48,11 +48,11 @@ class EmployeePayrollHome extends React.Component {
                         {this.state.employeeArray.length}
                     </div>
                 </div>
-                <div className="search-box" onClick={this.openSearch}>
+                {/* <div className="search-box" onClick={this.openSearch}>
                   <input className={"search-input " + (this.state.searchExpand && "input-expand")}
                     onChange={this.search} type="text" placeholder="" />
                   <img className="search-icon" src={addIcon} alt="Search Icon" />
-                </div>
+                </div> */}
                 <Link to="payroll-form" className="add-button">
                   <img src={addIcon} alt="Add Button" />Add User
                 </Link>

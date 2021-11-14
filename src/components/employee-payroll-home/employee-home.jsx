@@ -9,13 +9,29 @@ import profile4 from '../../assets/profile-images/Ellipse -7.png';
 import profile5 from '../../assets/profile-images/Ellipse -2.png';
 import profile6 from '../../assets/profile-images/Ellipse -1.png';
 import EmployeeService from '../../services/employee-service';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+
 
 var employee=new EmployeeService();
+
 const Display = (props) => {
   //alert(typeof(props.employeeArray));
-
  
+  const update = (id) =>{
+    let editEmployee;
+    employee.getEmployee(id).then(employeeData => {
+        editEmployee = employeeData.data;
+        localStorage.setItem("employeeDetails", JSON.stringify(editEmployee));
+    });
+    window.location.replace("/home/payroll-form");
+    //employee.updateEmployee(editEmployee, id);
+  }
+
+  const remove= (id) =>{
+    employee.deleteEmployee(id);
+    window.location.reload();
+  } 
+
   return (
     <table id="display" className="table">
       <tbody>
@@ -32,7 +48,7 @@ const Display = (props) => {
         {
             props.employeeArray && props.employeeArray.map((employee,index) => (
               <tr key={index}>
-                  <td><img className="profile" src={profile1} alt="" /></td>
+                  <td><img className="profile" src={employee.profileUrl} alt="" /></td>
                   <td>{employee.name}</td>
                   <td>{employee.gender}</td>
                   <td>{employee.departmentValue && employee.departmentValue.map(dept => 
@@ -40,21 +56,13 @@ const Display = (props) => {
                   <td> ₹ {employee.salary}</td>
                   <td>{employee.startDate}</td>
                   <td><img src={deleteIcon} onClick={() => remove(employee.id)} alt="delete" />
-                      <img src={editIcon} onClick={() => edit(employee.id)} alt="edit" /></td>
+                      <img src={editIcon} onClick={() => update(employee.id)} alt="edit" /></td>
               </tr>
             ))
           }
         </tbody>
     </table>
   )
-}
-
-const remove= (id) =>{
-  employee.deleteEmployee(id);
-} 
-
-
-const edit = (id) => {
 }
 
 export default Display;
