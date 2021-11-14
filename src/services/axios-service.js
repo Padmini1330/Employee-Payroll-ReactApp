@@ -1,5 +1,6 @@
 const axios=require('axios').default;
-class AxiosService{
+class AxiosService
+{
     postService(url='',payload=null,tokenRequired=false,httpOptions=null)
     {
         return axios.post(url,payload,tokenRequired && httpOptions);
@@ -15,7 +16,8 @@ class AxiosService{
         return axios.put(url, payload,tokenRequired && httpOptions);
     }
 
-    deleteService(url = '', tokenRequired = false, httpOptions = null) {
+    deleteService(url = '', tokenRequired = false, httpOptions = null) 
+    {
         return axios.delete(url, tokenRequired && httpOptions);
     }
 }
