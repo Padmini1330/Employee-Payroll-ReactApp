@@ -10,7 +10,7 @@
       "startDate": "1 Nov 2021",
       "notes": "aaa",
       "id": 1,
-      "profileUrl": "../../assets/profile-images/Ellipse -3.png"
+      "profileUrl": "profile-images/Ellipse -3.png"
     },
     {
       "name": "Amy",
@@ -22,19 +22,7 @@
       "startDate": "06 Nov 2021",
       "notes": "test2",
       "id": 2,
-      "profileUrl": "../../assets/profile-images/Ellipse -4.png"
-    },
-    {
-      "name": "Padmini",
-      "departmentValue": [
-        "Engineer"
-      ],
-      "gender": "female",
-      "salary": "48000",
-      "startDate": "10 Nov 2021",
-      "notes": "test3",
-      "id": 3,
-      "profileUrl": "../../assets/profile-images/Ellipse -4.png"
+      "profileUrl": "profile-images/Ellipse -4.png"
     },
     {
       "name": "Shizuka",
@@ -49,21 +37,7 @@
       "startDate": "11 Nov 2021",
       "notes": "test4",
       "id": 4,
-      "profileUrl": "../../assets/profile-images/Ellipse -7.png"
-    },
-    {
-      "name": "Padminii",
-      "departmentValue": [
-        "Engineer",
-        "Others",
-        "Finance"
-      ],
-      "gender": "female",
-      "salary": "40000",
-      "startDate": "1 Nov 2021",
-      "notes": "abc",
-      "id": 5,
-      "profileUrl": "../../assets/profile-images/Ellipse -4.png"
+      "profileUrl": "profile-images/Ellipse -7.png"
     },
     {
       "name": "Jessica",
@@ -75,32 +49,19 @@
       "startDate": "1 Nov 2021",
       "notes": "abc",
       "id": 6,
-      "profileUrl": "../../assets/profile-images/Ellipse -1.png"
+      "profileUrl": "profile-images/Ellipse -1.png"
     },
     {
-      "name": "Rachel",
+      "name": "Padminii",
       "departmentValue": [
-        "Finance"
+        "Sales"
       ],
       "gender": "female",
       "salary": "40000",
-      "startDate": "07 Nov 2021",
-      "notes": "abcdef",
+      "startDate": "10 Nov 2021",
+      "notes": "abcc",
       "id": 8,
-      "profileUrl": "../../assets/profile-images/Ellipse -4.png"
-    },
-    {
-      "name": "Alice",
-      "departmentValue": [
-        "Others",
-        "Engineer"
-      ],
-      "gender": "female",
-      "salary": "40001",
-      "startDate": "1 Nov 2021",
-      "notes": "aaa",
-      "id": 10,
-      "profileUrl": "../../assets/profile-images/Ellipse -4.png"
+      "profileUrl": "profile-images/Ellipse -5.png"
     },
     {
       "name": "Gortimer",
@@ -112,46 +73,19 @@
       "startDate": "1 Nov 2021",
       "notes": "abc",
       "id": 12,
-      "profileUrl": "../../assets/profile-images/Ellipse -5.png"
+      "profileUrl": "profile-images/Ellipse -5.png"
     },
     {
-      "name": "Hardman",
-      "departmentValue": [
-        "Sales",
-        "Finance"
-      ],
-      "gender": "male",
-      "salary": "40000",
-      "startDate": "1 Oct 2021",
-      "notes": "abc",
-      "id": 14,
-      "profileUrl": "../../assets/profile-images/Ellipse -2.png"
-    },
-    {
-      "name": "PadminiV",
+      "name": "AliaVSH",
       "departmentValue": [
         "Finance"
       ],
       "gender": "female",
       "salary": "40000",
       "startDate": "1 Nov 2021",
-      "notes": "aaa",
+      "notes": "aaaa",
       "id": "130721c0-4436-11ec-a6ff-5dede3901293",
-      "profileUrl": "../../assets/profile-images/Ellipse -4.png"
-    },
-    {
-      "name": "Mike",
-      "departmentValue": [
-        "HR",
-        "Sales",
-        "Finance"
-      ],
-      "gender": "male",
-      "salary": "50000",
-      "startDate": "1 Nov 2021",
-      "notes": "test",
-      "id": "73f1fb20-4519-11ec-b14c-afb278ed4a91",
-      "profileUrl": "../../assets/profile-images/Ellipse -5.png"
+      "profileUrl": "profile-images/Ellipse -4.png"
     }
   ]
 }
