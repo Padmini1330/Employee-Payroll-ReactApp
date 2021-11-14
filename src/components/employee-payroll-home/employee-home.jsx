@@ -11,6 +11,7 @@ import profile6 from '../../assets/profile-images/Ellipse -1.png';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 const Display = (props) => {
+  //alert(typeof(props.employeeArray));
   return (
     <table id="display" className="table">
       <tbody>
@@ -25,12 +26,12 @@ const Display = (props) => {
             <th>Actions</th>
         </tr>
         {
-            props.employeeArray && props.employeeArray.map((employee,ind) => (
-              <tr key={ind}>
+            props.employeeArray && props.employeeArray.map((employee,index) => (
+              <tr key={index}>
                   <td><img className="profile" src={profile1} alt="" /></td>
                   <td>{employee.name}</td>
                   <td>{employee.gender}</td>
-                  <td>{employee.department && employee.department.map(dept => 
+                  <td>{employee.departmentValue && employee.departmentValue.map(dept => 
                     (<div className="dept-label">{dept}</div>))}</td>
                   <td> ₹ {employee.salary}</td>
                   <td>{employee.startDate}</td>
