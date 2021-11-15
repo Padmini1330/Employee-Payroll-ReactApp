@@ -8,11 +8,12 @@ import profile6 from '../../assets/profile-images/Ellipse -1.png';
 import './payroll-form.scss';
 import logo from '../../assets/images/logo.png';
 import { v1 as uuidv1 } from 'uuid';
-import { userParams, Link, withRouter } from 'react-router-dom';
+import { useParams, Link, withRouter } from 'react-router-dom';
 import EmployeeService from '../../services/employee-service';
 
 
 const PayrollForm = (props) => {
+  const { id } = useParams()
 
   let initialValue = {
   name: '',
@@ -36,7 +37,6 @@ const PayrollForm = (props) => {
   id: '',      
   profileUrl:'',
   isUpdate: false,
-  isError: false,
   error: {
     department: '',
     name: '',
@@ -50,18 +50,6 @@ const PayrollForm = (props) => {
 
 const employee=new EmployeeService();
 const [formValue,setForm] = useState(initialValue); 
-
-//props.history.push
-if (window.location.pathname !== "/home/payroll-form") {
-  localStorage.setItem("employeeDetails", null);
-}
-
-const employeeData = JSON.parse(localStorage.getItem("employeeDetails"));
-
-
-if (employeeData) {
-  initialValue.isUpdate=true;
- }
 
 const changeValue=(event)=>{
     setForm({...formValue,[event.target.name]: event.target.value})
@@ -120,16 +108,37 @@ const validData=async()=>{
     return isError;
 }
 
+const update = () => {
+  if (id) {
+      formValue.isUpdate = true
+      employee.getEmployee(id).then(emp => {
+          var date = emp.data.startDate.split(" ");
+          setForm({
+              ...formValue,
+              name: emp.data.name,
+              profileUrl: emp.data.profileUrl,
+              departmentValue: emp.data.departmentValue,
+              gender: emp.data.gender,
+              salary: emp.data.salary,
+              day: date[0],
+              month: date[1],
+              year: date[2],
+              notes: emp.data.notes
+          });
+      }).catch(error => {
+          console.log(error)
+      })
+  }
+}
+
 const save = async(event)=>{
   event.preventDefault();
-  console.log("save");
-
   if(await validData())
   {
       console.log('error',formValue);
       return;
   }
-  if(initialValue.isUpdate)
+  if(formValue.isUpdate)
   {
     let object ={
 
@@ -139,16 +148,15 @@ const save = async(event)=>{
       salary:formValue.salary,
       startDate:`${formValue.day} ${formValue.month} ${formValue.year}`,
       notes:formValue.notes,
-      id:employeeData.id,
+      id:id,
       profileUrl:formValue.profileUrl,
     }
-
-    employee.updateEmployee(object,employeeData.id);
+    employee.updateEmployee(object,id);
+    formValue.isUpdate=false
    }
    else
    {
-    let object ={
-
+    let object = {
       name:formValue.name,
       departmentValue:formValue.departmentValue,
       gender:formValue.gender,
@@ -160,18 +168,14 @@ const save = async(event)=>{
     }
 
     employee.addEmployee(object).then(data=>{
-      window.location="http://localhost:3002/home";
-        alert("Employee added successfully!\n"+ JSON.stringify(data.data));
-        this.reset();
         console.log("Data added successfully!");
     }).catch(err =>{
         console.log("Error while adding data");
     })
-    //this.reset();
    }
+
+   window.location="http://localhost:3002/";
   
-
-
 }
 
 const reset=()=>{
@@ -182,7 +186,7 @@ const reset=()=>{
 }
   
     return (
-      <div className="body">
+      <div className="body" onLoad={update}>
         <header className="headerContainer header">
           <div className="logoContainer">
             <img src={logo} alt="" />
@@ -197,7 +201,7 @@ const reset=()=>{
             <div className="form-head">Employee Payroll form</div>
             <div className="row-content">
               <label className="label text" htmlFor="name">Name</label>
-              <input className="input" type="text" id="name" name="name" defaultValue={employeeData?employeeData.name:''} onChange={changeValue} placeholder="Your name.." required />
+              <input className="input" type="text" id="name" name="name" value={formValue.name} onChange={changeValue} placeholder="Your name.." required />
               <div className="error-output">{formValue.error.name}</div>
               </div>
 
@@ -205,32 +209,32 @@ const reset=()=>{
               <label className="label text" htmlFor="profileUrl">Profile Image</label>
               <div className="profile-radio-content">
                 <label>
-                  <input type="radio" id="profile1" name="profileUrl" defaultValue={employeeData?employeeData.profileUrl:''} 
+                  <input type="radio" id="profile1" name="profileUrl" value="profile-images/Ellipse -3.png" 
                     checked={formValue.profileUrl === 'profile-images/Ellipse -3.png'} onChange={changeValue} />
                   <img className="profile" id="image1" src={profile1} alt="" />
                 </label>
                 <label>
-                  <input type="radio" id="profile2" name="profileUrl" defaultValue={employeeData?employeeData.profileUrl:''} 
+                  <input type="radio" id="profile2" name="profileUrl" value="profile-images/Ellipse -4.png" 
                     checked={formValue.profileUrl === 'profile-images/Ellipse -4.png'} onChange={changeValue} />
                   <img className="profile" id="image2" src={profile2} alt="" />
                 </label>
                 <label>
-                  <input type="radio" id="profile3" name="profileUrl" defaultValue={employeeData?employeeData.profileUrl:''} 
+                  <input type="radio" id="profile3" name="profileUrl" value="profile-images/Ellipse -5.png"
                     checked={formValue.profileUrl === 'profile-images/Ellipse -5.png'} onChange={changeValue} />
                   <img className="profile" id="image3" src={profile3} alt="" />
                 </label>
                 <label>
-                  <input type="radio" id="profile4" name="profileUrl" defaultValue={employeeData?employeeData.profileUrl:''} 
+                  <input type="radio" id="profile4" name="profileUrl" value="profile-images/Ellipse -7.png" 
                     checked={formValue.profileUrl === 'profile-images/Ellipse -7.png'} onChange={changeValue} />
                   <img className="profile" id="image4" src={profile4} alt="" />
                 </label>
                 <label>
-                  <input type="radio" id="profile5" name="profileUrl" defaultValue={employeeData?employeeData.profileUrl:''} 
+                  <input type="radio" id="profile5" name="profileUrl" value="profile-images/Ellipse -2.png"
                     checked={formValue.profileUrl === 'profile-images/Ellipse -2.png'} onChange={changeValue} />
                   <img className="profile" id="image5" src={profile5} alt="" />
                 </label>
                 <label>
-                  <input type="radio" id="profile6" name="profileUrl" defaultValue={employeeData?employeeData.profileUrl:''} 
+                  <input type="radio" id="profile6" name="profileUrl" value="profile-images/Ellipse -1.png" 
                     checked={formValue.profileUrl === 'profile-images/Ellipse -1.png'} onChange={changeValue} />
                   <img className="profile" id="image6" src={profile6} alt="" />
                 </label>
@@ -242,11 +246,11 @@ const reset=()=>{
               <label className="label text" htmlFor="gender">Gender</label>
               <div>
                 <label>
-                  <input type="radio" id="male" checked={formValue.gender === 'male'} onChange={changeValue} name="gender" defaultValue={employeeData?employeeData.gender:''}  />
+                  <input type="radio" id="male" checked={formValue.gender === 'male'} onChange={changeValue} name="gender" value="male"  />
                   <label className="text" htmlFor="male">Male</label>
                 </label>
                 <label>
-                  <input type="radio" id="female" checked={formValue.gender === 'female'} onChange={changeValue} name="gender" defaultValue={employeeData?employeeData.gender:''}  />
+                  <input type="radio" id="female" checked={formValue.gender === 'female'} onChange={changeValue} name="gender" value="female"  />
                   <label className="text" htmlFor="female">Female</label>
                 </label>
               </div>
@@ -259,7 +263,9 @@ const reset=()=>{
                         <div>
                             {formValue.allDepartments.map(item => (
                                 <span key={item}>
-                                    <input className="checkbox" type="checkbox" onChange={() => onCheckChange(item)} name={item} defaultChecked={() => getChecked(item)} defaultValue={employeeData?employeeData.departmentValue:''} />
+                                    <input className="checkbox" type="checkbox" onChange={() => onCheckChange(item)} name={item} 
+                                    defaultChecked={() => getChecked(item)} value={item} 
+                                    checked={formValue.departmentValue.includes(item)}/>
                                     <label className="text" htmlFor={item}>{item}</label>
                                 </span>
                             ))}
@@ -269,7 +275,7 @@ const reset=()=>{
 
               <div className="row-content">
                         <label className="label text" htmlFor="salary">Salary:</label>
-                        <input className="input" type="text" id="salary" name="salary" defaultValue={employeeData?employeeData.salary:''} onChange={changeValue} />
+                        <input className="input" type="text" id="salary" name="salary" value={formValue.salary} onChange={changeValue} />
                         <div className="error-output">{formValue.error.salary}</div>
               </div>
               <br />
@@ -278,7 +284,7 @@ const reset=()=>{
             <div className="row-content">
               <label className="label text" htmlFor="startDate">Start Date</label>
               <div name="startdate" id="startDate">
-                <select onChange={changeValue} defaultValue={employeeData?employeeData.day:''} id="day" name="day">
+                <select onChange={changeValue} value={formValue.day} id="day" name="day">
                   <option value="01">1</option>
                   <option value="02">2</option>
                   <option value="03">3</option>
@@ -311,7 +317,7 @@ const reset=()=>{
                   <option value="30">30</option>
                   <option value="31">31</option>
                 </select>
-                <select onChange={changeValue} defaultValue={employeeData?employeeData.month:''} id="month" name="month">
+                <select onChange={changeValue} value={formValue.month} id="month" name="month">
                   <option value="Jan">January</option>
                   <option value="Feb">February</option>
                   <option value="Mar">March</option>
@@ -325,7 +331,7 @@ const reset=()=>{
                   <option value="Nov">November</option>
                   <option value="Dec">December</option>
                 </select>
-                <select onChange={changeValue} defaultValue={employeeData?employeeData.year:''} id="year" name="year">
+                <select onChange={changeValue} value={formValue.year} id="year" name="year">
                   <option value="2020">2021</option>
                   <option value="2020">2020</option>
                   <option value="2019">2019</option>
@@ -339,13 +345,13 @@ const reset=()=>{
              
             <div className="row-content">
               <label className="label text" htmlFor="notes">Notes</label>
-              <textarea className="input" onChange={changeValue} defaultValue={employeeData?employeeData.notes:''} id="notes" name="notes" placeholder="Write a note..." style={{height:'100px'}}></textarea>
+              <textarea className="input" onChange={changeValue} value={formValue.notes} id="notes" name="notes" placeholder="Write a note..." style={{height:'100px'}}></textarea>
               <div className="error-output">{formValue.error.notes}</div>
             </div>
             <div className="buttonParent">
-              <Link to="" className="resetButton button cancelButton">Cancel</Link>
+              <Link to="/" className="resetButton button cancelButton">Cancel</Link>
               <div className="submit-reset">
-                <button className="button submitButton" type="submit" id="submitButton">{formValue.isUpdate? 'Update' : 'Submit'}</button>
+              <button type="submit" className="button submitButton" id="submitButton" onClick={save}>{formValue.isUpdate ? 'Update' : 'Submit'}</button>
                 <button className="resetButton button" onClick={reset} type="reset">Reset</button>
               </div>
             </div>
