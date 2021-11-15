@@ -8,9 +8,8 @@ function App() {
   return (
     <BrowserRouter>  
     <Routes>
-      <Route exact path="/" element={<PayrollForm />}/> 
-      <Route exact path="/home" element={<EmployeePayrollHome />}/>
-      <Route exact path="/home/payroll-form" element={<PayrollForm />}/> 
+      <Route exact path="/payroll-form" element={<PayrollForm />}/> 
+      <Route exact path="/" element={<EmployeePayrollHome />}/>
       <Route exact path="/payroll-form/:id" element={<PayrollForm />}/>
     </Routes>
     </BrowserRouter>
