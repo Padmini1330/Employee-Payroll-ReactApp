@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './employee-payroll-home.scss';
 import deleteIcon from '../../assets/icons/delete-black-18dp.svg';
 import editIcon from '../../assets/icons/create-black-18dp.svg';
@@ -9,24 +9,23 @@ import profile4 from '../../assets/profile-images/Ellipse -7.png';
 import profile5 from '../../assets/profile-images/Ellipse -2.png';
 import profile6 from '../../assets/profile-images/Ellipse -1.png';
 import EmployeeService from '../../services/employee-service';
-import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes, Link} from 'react-router-dom'
 
 
 var employee=new EmployeeService();
 
 const Display = (props) => {
-  //alert(typeof(props.employeeArray));
  
-  const update = (id) =>{
-    let editEmployee;
-    employee.getEmployee(id).then(employeeData => {
-        editEmployee = employeeData.data;
-        localStorage.setItem("employeeDetails", JSON.stringify(editEmployee));
-    });
-    window.location.replace("/home/payroll-form");
-    //employee.updateEmployee(editEmployee, id);
-  }
+  const [employeeData, setEmployeeData] = useState([])
 
+
+  const update = (id) => {
+    employee.getEmployee(id).then(emp => {
+        setEmployeeData(emp.data)
+        console.log(emp.data.departmentValue);
+    });
+  }
+ 
   const remove= (id) =>{
     employee.deleteEmployee(id);
     window.location.reload();
@@ -56,12 +55,16 @@ const Display = (props) => {
                   <td> ₹ {employee.salary}</td>
                   <td>{employee.startDate}</td>
                   <td><img src={deleteIcon} onClick={() => remove(employee.id)} alt="delete" />
-                      <img src={editIcon} onClick={() => update(employee.id)} alt="edit" /></td>
+                      <Link to={"/payroll-form/" + (employee.id)}> 
+                      <img onClick={() => update(employee.id)} src={editIcon} alt="edit" />
+                      </Link>
+                  </td>
               </tr>
             ))
           }
         </tbody>
     </table>
+    
   )
 }
 
